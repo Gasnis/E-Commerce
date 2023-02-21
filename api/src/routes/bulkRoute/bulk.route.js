@@ -1,6 +1,5 @@
-const { Local, User } = require("../../db");
 const {Router} = require("express");
-const bulkCreate = require("../../controllers/bulkController/bulk.controller");
+const bulkCreate = require("../../controllers/bulkController/bulk");
 
 const router = Router()
 

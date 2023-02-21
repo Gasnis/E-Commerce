@@ -17,26 +17,6 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    phone: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    image: {
-      type: DataTypes.TEXT,
-      allowNull: true,
-      defaultValue:"https://i.pinimg.com/550x/18/b9/ff/18b9ffb2a8a791d50213a9d595c4dd52.jpg"
-    },
-    birthday: {
-        type: DataTypes.DATEONLY,
-        allowNull: false,
-      },
-    ban: {
-      type: DataTypes.BOOLEAN,
-      defaultValue: false,
-    },
-    city: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      }
+    
   });
 };

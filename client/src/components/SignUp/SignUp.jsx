@@ -1,46 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect  } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { createUser, getUserByid } from '../../redux/actions';
-import Navbar from '../Navbar/Navbar';
-import styles from '../FormsStyles/forms.module.css';
 import { validation } from './ValidationSignUp';
+import { gapi } from "@emailjs/browser"
 import GoogleLogin from "react-google-login";
-import { gapi } from "gapi-script"
-import { useEffect } from "react";
-import emailjs from "@emailjs/browser"
 import axios from 'axios';
 import swal from "sweetalert";
+import styles from '../FormsStyles/forms.module.css';
 
-function getMaxDate(minAge) {
-    let today = new Date();
-    let birthdate = new Date(today - minAge * 365 * 24 * 60 * 60 * 1000);
-    let year = birthdate.getFullYear();
-    let month = birthdate.getMonth() + 1;
-    let day = birthdate.getDate();
-    if (month < 10) {
-        month = `0${month}`;
-    }
-    if (day < 10) {
-        day = `0${day}`;
-    }
-    return `${year}-${month}-${day}`
-}
-
-export default function SignUp(props) {
+export default function SignUp() {
 
     const dispatch = useDispatch();
     const history = useHistory();
-    const checked = useSelector((state) => state.darkmode);
 
 
     const [signUp, setSignUp] = useState({
         name: "",
         id: "",
         password: "",
-        phone: "",
-        birthday: "",
-        city: "",
     })
 
     const [errors, setErrors] = useState({
@@ -72,12 +50,9 @@ export default function SignUp(props) {
                 name: "",
                 id: "",
                 password: "",
-                phone: "",
-                birthday: "",
-                city: "",
             })
             await dispatch(getUserByid(newUser.id))
-            history.push(`/profile`)
+            history.push(`/home`)
         } else {
             swal(newUser.response.data, {
                 icon: "error",
@@ -96,16 +71,6 @@ export default function SignUp(props) {
         }
         gapi.load("client:auth2", start)
     }, [])
-
-    const generarString = (longitud) => {
-        let result = "";
-        const abcABCNum = "a b c d e f g h i j k l m n o p q r s t u v w x y z A B C D E F G H I J K L M N O P Q R S T U V W X Y Z 0 1 2 3 4 5 6 7 8 9".split(" "); // Espacios para convertir cara letra a un elemento de un array
-        for (let i = 0; i <= longitud; i++) {
-            const random = Math.floor(Math.random() * abcABCNum.length);
-            result += abcABCNum[random]
-        }
-        return result;
-    };
 
     const responseGoogle = async (respuesta) => {
         const userName = respuesta.profileObj.name;

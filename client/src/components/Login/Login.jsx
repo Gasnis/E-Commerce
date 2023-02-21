@@ -1,13 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, logout } from "../../redux/actions";
-import Navbar from "../Navbar/Navbar";
 import styles from "../FormsStyles/forms.module.css";
 import { getUserByid } from "../../redux/actions";
 import GoogleLogin from "react-google-login";
-import { gapi } from "gapi-script"
-import { useEffect } from "react";
 import swal from "sweetalert";
 import { HiOutlineEye } from "react-icons/hi2";
 import { HiOutlineEyeSlash } from "react-icons/hi2";
@@ -16,7 +13,6 @@ import { HiOutlineEyeSlash } from "react-icons/hi2";
 export default function Login() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const checked = useSelector((state) => state.darkmode);
   const currentProfile = useSelector((state) => state.profile);
   const [login, setLogin] = useState({  // 
     id: "",
@@ -48,20 +44,9 @@ export default function Login() {
       (user) => user.id === login.id[0]
     );
     if (currentUser.length) {
-      if (currentUser[0].ban === true) {
-        logout()
-        setLogin({
-          id: "",
-          password: "",
-        });
-        swal("El usuario ha sido BANEADO", {
-          icon: "error",
-          className: styles.swal,
-        });
-      } else {
         if (currentUser[0].password === login.password[0]) {
           dispatch(getUserByid(login.id));
-          history.push("/");
+          history.push("/home");
           setLogin({
             id: "",
             password: "",
@@ -72,7 +57,6 @@ export default function Login() {
             className: styles.swal,
           });
         }
-      }
     } else {
       swal("El usuario o contraseña es incorrecto", {
         icon: "error",
