@@ -1,14 +1,18 @@
 import {
     GET_USER,
-    GET_USER_BY_ID,
+    GET_PRODUCTS,
+    GET_USER_ID,
     LOGOUT,
+    SEARCH_PRODUCT
 } from "./actions"
 
 
 const initialState = {
-    profile: {},
+    products: [],
+    allProducts: [],
     users: [],
     allUsers: [],
+    profile: {},
 }
 
 export default function reducer(state = initialState, action) {
@@ -21,10 +25,23 @@ export default function reducer(state = initialState, action) {
                 users: action.payload
             }
 
-        case GET_USER_BY_ID:
+        case GET_USER_ID:
+            console.log(action.payload)
             return {
                 ...state,
                 profile: action.payload
+            }
+
+        case GET_PRODUCTS:
+            return {
+                ...state,
+                products: action.payload,
+                allProducts: action.payload
+            }
+        case SEARCH_PRODUCT:
+            return {
+                ...state,
+                products: action.payload,
             }
 
         case LOGOUT:
@@ -32,6 +49,7 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 profile: {}
             }
+        
             
         default:
             return state;

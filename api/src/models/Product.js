@@ -20,6 +20,16 @@ module.exports = (sequelize) => {
       defaultValue: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Imagen_no_disponible.svg/1024px-Imagen_no_disponible.svg.png"
     },
 
+    color:{
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: false,
+    },
+
+    size:{
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      allowNull: false,
+    },
+
     observations:{
       type: DataTypes.STRING,
       allowNull: true,

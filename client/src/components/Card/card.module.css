@@ -1,0 +1,51 @@
+.cards{
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 10px;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    height:90vh;
+    width: 50vh;
+}
+
+.image img{
+    height:60vh;
+    width: 50vh;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.observations{
+  position: absolute;
+  height: 45vh;
+  width: 40vh;
+  top:70px;
+  visibility: hidden;
+}
+
+.card .observations:hover{
+    background-color: white;
+    visibility: visible;
+}
+
+.variaciones{
+    display:flex;
+    position: relative;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    top: -40px;
+}
+
+.dropOpt{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px;
+    top: -100px;
+    padding: 5px;
+}

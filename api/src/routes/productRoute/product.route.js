@@ -39,6 +39,16 @@ router.put("/", async (req, res) => {
     }
 });
 
+router.put("/delete", async (req, res) => {
+  try {
+    const newDataProduct = req.body
+    const updated = await deleteProduct(newDataProduct)
+    res.status(200).send(updated);
+} catch (error) {
+    res.status(400).send(error.message);
+}
+})
+
 router.delete("/", async (req, res) => {
     try {
     const { id } = req.body;

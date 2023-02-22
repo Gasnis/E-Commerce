@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import style from "../ScrollUpButton/ScrollUpButton.module.css";
 import {IoArrowUpSharp} from "react-icons/io5"
 
 export default function BackToTopButton() {
 
     const [BackToTop, setBackToTop] = useState(false);
-    const { darkmode } = useSelector(state => state)
 
     useEffect(() => {
         window.addEventListener("scroll", () => {
@@ -28,7 +26,7 @@ export default function BackToTopButton() {
     return (
         <div>
             {BackToTop && (
-                <button className={ darkmode ? style.scrollButton : style.scrollButtonDark} 
+                <button className={  style.scrollButton } 
                 onClick={scrollToTop}><IoArrowUpSharp className={style.icon}/></button>
             )}
         </div>

@@ -13,7 +13,7 @@ const postUserData = async (userData) => {
             return user
     
         }else{
-            throw new Error(`The user ${id} was already create`)
+            throw new Error(`El usuario ${id} ya esta registrado`)
         } 
 
     }else{
@@ -31,7 +31,7 @@ const getAllUsers = async (name) => {
         if (byName.length) {
           return byName
         }else{
-            throw new Error(`${name} not found :/`);
+            throw new Error(`${name} no encontrado`);
         }
     }
     return todos;
@@ -43,7 +43,7 @@ const getUserDetail = async (id) => {
     if (id) {
         const userDetail = await User.findOne({where: {id: id}})
         if (!userDetail) {
-            throw new Error("you can't access the detail of an nonexistent user")
+            throw new Error("Usuario no encontrado")
         }
         return userDetail
     }
@@ -65,11 +65,11 @@ const updateUser = async (newUserData) =>{
           const userUpdated = await User.findOne({where: {id: id}})
           return userUpdated
       }else{
-          throw new Error("You must write your own email")
+          throw new Error("Tienes que poner el mismo Email")
       }
 
   }else{
-    throw new Error("Not all parameters arrived successfully")
+    throw new Error("Falta rellenar campos")
   }
   
 }

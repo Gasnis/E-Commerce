@@ -5,7 +5,7 @@
     height: 4em;
     width: 4em;
     border-radius: 11px;
-    background-color: #40047C;
+    background-color: #4da998;
     color: #FDFBF2;
     z-index: 3;
 }
@@ -28,16 +28,7 @@
     }
   }
 
-.scrollButtonDark {
-    position: fixed;
-    bottom: 2em;
-    right: 2em;
-    height: 4em;
-    width: 4em;
-    border-radius: 11px;
-    background-color: #FDFBF2;
-    color: #40047C;
-}
+
 
 @media (max-width: 550px){
     .scrollButtonDark{

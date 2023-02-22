@@ -5,7 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #FCF9EB;
+  background-image: url("https://wallpaperaccess.com/full/5691572.jpg");
+  background-attachment: fixed;
 }
 
 code {
@@ -29,20 +30,19 @@ a {
 a:visited{text-decoration: none;}
 
 .swal-modal {
-  background-color: #FDFBF2;
-  border: 3px solid white;
+  background-color: #fefefe;
 }
 
 .swal-button {
   padding: 7px 19px;
   border-radius: 2px;
-  background-color: #40047C;
+  background-color: #359788;
   font-size: 12px;
-  border: 1px solid #40047C;
+  border: 1px solid #226158;
   text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
 }
 
 .swal-button--cancel {
-  background-color: #dad9d7;
+  background-color: #dfdfdf;
   border: none;
 }

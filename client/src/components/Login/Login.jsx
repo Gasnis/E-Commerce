@@ -1,19 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser, logout } from "../../redux/actions";
-import styles from "../FormsStyles/forms.module.css";
-import { getUserByid } from "../../redux/actions";
-import GoogleLogin from "react-google-login";
+import { getUser, getUserId } from "../../redux/actions";
 import swal from "sweetalert";
 import { HiOutlineEye } from "react-icons/hi2";
 import { HiOutlineEyeSlash } from "react-icons/hi2";
+import styles from "../FormsStyles/forms.module.css";
 
 
 export default function Login() {
   const dispatch = useDispatch();
   const history = useHistory();
   const currentProfile = useSelector((state) => state.profile);
+  
+  
+  if(currentProfile.id){
+    history.push("/home");
+  }
+
   const [login, setLogin] = useState({  // 
     id: "",
     password: "",
@@ -45,12 +49,13 @@ export default function Login() {
     );
     if (currentUser.length) {
         if (currentUser[0].password === login.password[0]) {
-          dispatch(getUserByid(login.id));
+          dispatch(getUserId(login.id));
           history.push("/home");
           setLogin({
             id: "",
             password: "",
           });
+          
         } else {
           swal("El usuario o contraseña es incorrecto", {
             icon: "error",
@@ -63,66 +68,28 @@ export default function Login() {
       });
     }
   }
-  const clientId = "553757960148-cs9ei96qh12hekvt7kecuo3fdf9d6ofp.apps.googleusercontent.com"
-
-  useEffect(() => {
-    const start = () => {
-      gapi.auth2.init({
-        clientId: clientId,
-      })
-    }
-    gapi.load("client:auth2", start)
-  }, [])
-
-  const responseGoogle = async (respuesta) => {
-    const userLoginId = respuesta.profileObj.email
-    const usuarios = await dispatch(getUser());
-    const currentUser = usuarios.payload.filter((user) => user.id === userLoginId)
-
-    if (currentUser.length) {
-      if (currentUser[0].ban === true) {
-        logout()
-        setLogin({
-          id: "",
-          password: "",
-        });
-        swal("El usuario ha sido baneado", {
-          icon: "error",
-        });
-      } else {
-        await dispatch(getUserByid(userLoginId))
-        history.push("/");
-      }
-    } else {
-      swal("Debes registrarte primero", {
-        icon: "error",
-      });
-      history.push("/sign-up");
-
-    }
-  }
 
 
 
   return (
     <div>
-      <Navbar />
-      <div className={checked ? styles.containerLogin : styles.containerLoginDark}>
-        <div className={checked ? styles.formContainer : styles.formContainerDark}>
-          <h1 className={checked ? styles.title : styles.titleDark}>Ingresa</h1>
+      <div className={ styles.containerLogin }>
+        <div className={ styles.formContainer }>
+          <h1 className={ styles.title }>Ingresa</h1>
+
           <form onSubmit={handleSubmit}>
             <div>
               <input
-                className={checked ? styles.input : styles.inputDark}
+                className={ styles.input }
                 type="text"
-                placeholder="Mail"
+                placeholder="Email"
                 value={login.id}
                 name="id"
                 onChange={handleChange}
               />
             </div>
 
-            <div className={checked ? styles.passwordInputCont : styles.passwordInputContDark}>
+            <div className={styles.passwordInputCont}>
               <input
                 className={styles.passwordInput}
                 type={passwordType}
@@ -141,29 +108,21 @@ export default function Login() {
             </div>
 
             <div className={styles.linksContainer}>
+
               <button
                 name="where"
                 type="submit"
                 id="loginButton"
-                className={checked ? styles.submitButton : styles.submitButtonDark}
+                className={styles.submitButton}
                 disabled={!login.id || !login.password}
               >
                 Ingresar
               </button>
 
-              <GoogleLogin
-                name="google"
-                clientId={clientId}
-                buttonText="Ingresar con Google"
-                onSuccess={responseGoogle}
-                onFailure={responseGoogle}
-                cookiePolicy={"single_host_origin"}
-              />
-
-              <Link to="/forgot-password" className={checked ? styles.link : styles.linkDark}>Olvidé mi contraseña</Link>
-              <Link to="/sign-up" className={checked ? styles.link : styles.linkDark}>Todavia no tenes una cuenta?</Link>
+              <Link to="/sign-up" className={ styles.link }>Todavia no tienes cuenta?</Link>
             </div>
           </form>
+
         </div>
       </div>
     </div>
