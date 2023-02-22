@@ -39,3 +39,5 @@ Una vez terminada adjuntar el enlace del repositorio de git al siguiente correo:
 melissa.coy@eciglogistica.com
 
 Muchas gracias y un saludo.
+
+DEPLOY https://front-production-0190.up.railway.app/
